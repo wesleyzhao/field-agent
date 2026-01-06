@@ -1,0 +1,69 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "termweave"
+version = "0.1.0"
+description = "Browser-based tmux session manager with xterm.js terminal"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+authors = [
+    {name = "Wesley"}
+]
+keywords = ["tmux", "terminal", "web", "xterm", "session-manager"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Web Environment",
+    "Framework :: FastAPI",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: System :: Shells",
+    "Topic :: Terminals :: Terminal Emulators/X Terminals",
+]
+
+dependencies = [
+    "fastapi>=0.100",
+    "uvicorn[standard]>=0.23",
+    "websockets>=12.0",
+    "pyjwt>=2.8",
+    "passlib[bcrypt]>=1.7",
+    "click>=8.0",
+    "rich>=13.0",
+    "pydantic>=2.0",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-asyncio>=0.21",
+    "httpx>=0.24",
+    "pytest-cov>=4.0",
+]
+
+[project.scripts]
+termweave = "termweave.cli.main:cli"
+
+[project.urls]
+Homepage = "https://github.com/wesley/termweave"
+Repository = "https://github.com/wesley/termweave"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+addopts = "-v"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W"]
+ignore = ["E501"]

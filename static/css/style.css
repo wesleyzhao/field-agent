@@ -1,0 +1,334 @@
+/* termweave - Mobile-first CSS */
+
+:root {
+    --bg-color: #1a1a2e;
+    --surface-color: #16213e;
+    --primary-color: #0f3460;
+    --accent-color: #e94560;
+    --text-color: #eee;
+    --text-muted: #888;
+    --success-color: #4ade80;
+    --error-color: #f87171;
+    --border-radius: 8px;
+    --safe-area-inset-top: env(safe-area-inset-top, 0px);
+    --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    overflow: hidden;
+}
+
+#app {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.view {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Login View */
+.login-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    padding-top: var(--safe-area-inset-top);
+}
+
+.login-container h1 {
+    font-size: 2rem;
+    margin-bottom: 8px;
+    color: var(--accent-color);
+}
+
+.login-container .subtitle {
+    color: var(--text-muted);
+    margin-bottom: 32px;
+}
+
+#login-form {
+    width: 100%;
+    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+#login-form input {
+    padding: 16px;
+    font-size: 16px; /* Prevents iOS zoom */
+    background: var(--surface-color);
+    border: 1px solid var(--primary-color);
+    border-radius: var(--border-radius);
+    color: var(--text-color);
+    outline: none;
+}
+
+#login-form input:focus {
+    border-color: var(--accent-color);
+}
+
+#login-form button {
+    padding: 16px;
+    font-size: 16px;
+    font-weight: bold;
+    background: var(--accent-color);
+    border: none;
+    border-radius: var(--border-radius);
+    color: white;
+    cursor: pointer;
+    min-height: 48px; /* Touch target */
+}
+
+#login-form button:active {
+    opacity: 0.8;
+}
+
+.error {
+    color: var(--error-color);
+    font-size: 14px;
+    text-align: center;
+    min-height: 20px;
+}
+
+/* Sessions View */
+#sessions-view header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    padding-top: calc(16px + var(--safe-area-inset-top));
+    background: var(--surface-color);
+    border-bottom: 1px solid var(--primary-color);
+}
+
+#sessions-view header h1 {
+    font-size: 1.5rem;
+}
+
+.header-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.icon-btn {
+    width: 44px;
+    height: 44px;
+    font-size: 1.5rem;
+    background: transparent;
+    border: 1px solid var(--primary-color);
+    border-radius: var(--border-radius);
+    color: var(--text-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-btn:active {
+    background: var(--primary-color);
+}
+
+#sessions-view main {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    padding-bottom: calc(16px + var(--safe-area-inset-bottom));
+}
+
+#sessions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.session-card {
+    background: var(--surface-color);
+    border: 1px solid var(--primary-color);
+    border-radius: var(--border-radius);
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    min-height: 64px;
+}
+
+.session-card:active {
+    background: var(--primary-color);
+}
+
+.session-info {
+    flex: 1;
+}
+
+.session-name {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 4px;
+}
+
+.session-meta {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.session-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--text-muted);
+}
+
+.status-dot.attached {
+    background: var(--success-color);
+}
+
+.session-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.delete-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+    background: transparent;
+    border: 1px solid var(--error-color);
+    border-radius: var(--border-radius);
+    color: var(--error-color);
+    cursor: pointer;
+}
+
+.delete-btn:active {
+    background: var(--error-color);
+    color: white;
+}
+
+.primary-btn {
+    width: 100%;
+    padding: 16px;
+    font-size: 16px;
+    font-weight: bold;
+    background: var(--accent-color);
+    border: none;
+    border-radius: var(--border-radius);
+    color: white;
+    cursor: pointer;
+    min-height: 48px;
+}
+
+.primary-btn:active {
+    opacity: 0.8;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 48px 16px;
+    color: var(--text-muted);
+}
+
+/* Terminal View */
+#terminal-view {
+    background: #000;
+}
+
+.terminal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 16px;
+    padding-top: calc(8px + var(--safe-area-inset-top));
+    background: var(--surface-color);
+    border-bottom: 1px solid var(--primary-color);
+}
+
+.terminal-header .icon-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 1.2rem;
+}
+
+#session-name {
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+#terminal-container {
+    flex: 1;
+    padding: 4px;
+    padding-bottom: var(--safe-area-inset-bottom);
+    overflow: hidden;
+}
+
+/* xterm.js overrides */
+.xterm {
+    height: 100%;
+}
+
+.xterm-viewport {
+    overflow-y: auto !important;
+}
+
+/* Loading spinner */
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 48px;
+}
+
+.spinner {
+    width: 32px;
+    height: 32px;
+    border: 3px solid var(--primary-color);
+    border-top-color: var(--accent-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+    .login-container h1 {
+        font-size: 2.5rem;
+    }
+
+    #login-form {
+        max-width: 400px;
+    }
+
+    .session-card {
+        padding: 20px;
+    }
+}
