@@ -5,24 +5,24 @@ This file provides guidance for Claude Code and other AI assistants working on t
 ## Quick Start for Development
 
 ```bash
-cd ~/termweave
+cd ~/field-agent
 
 # Install in development mode
 pip install -e ".[dev]"
 
 # Generate credentials for testing
-termweave generate-secret
-termweave hash-passphrase
+field-agent generate-secret
+field-agent hash-passphrase
 
 # Set environment variables
-export TERMWEAVE_SECRET_KEY="your-generated-key"
-export TERMWEAVE_PASSPHRASE_HASH="your-generated-hash"
+export FIELD_AGENT_SECRET_KEY="your-generated-key"
+export FIELD_AGENT_PASSPHRASE_HASH="your-generated-hash"
 
 # Run the server
-termweave serve --reload
+field-agent serve --reload
 
 # Or run directly with uvicorn
-PYTHONPATH=. python3 -m uvicorn termweave.server.app:app --host 0.0.0.0 --port 8080 --reload
+PYTHONPATH=. python3 -m uvicorn field-agent.server.app:app --host 0.0.0.0 --port 8080 --reload
 ```
 
 ## Running Tests
@@ -41,7 +41,7 @@ pytest tests/unit/test_auth.py -v
 pytest tests/integration/ -v
 
 # With coverage
-pytest --cov=termweave tests/
+pytest --cov=field-agent tests/
 ```
 
 **Test passphrase for integration tests:** `my-super-secure-test-passphrase-2024`
@@ -49,8 +49,8 @@ pytest --cov=termweave tests/
 ## Project Architecture
 
 ```
-termweave/
-├── termweave/              # Main package
+field-agent/
+├── field-agent/              # Main package
 │   ├── __init__.py         # Version info
 │   ├── config.py           # Configuration (env vars + YAML)
 │   ├── auth.py             # PassphraseHasher + JWTManager
@@ -123,11 +123,11 @@ Server → Client (JSON):  {"type": "error", "message": "..."}
 
 | Variable | Required | Description |
 |----------|----------|-------------|
-| `TERMWEAVE_SECRET_KEY` | Yes | JWT signing key (min 32 chars) |
-| `TERMWEAVE_PASSPHRASE_HASH` | Yes | bcrypt hash of login passphrase |
-| `TERMWEAVE_HOST` | No | Server host (default: 0.0.0.0) |
-| `TERMWEAVE_PORT` | No | Server port (default: 8080) |
-| `TERMWEAVE_DEBUG` | No | Enable debug mode |
+| `FIELD_AGENT_SECRET_KEY` | Yes | JWT signing key (min 32 chars) |
+| `FIELD_AGENT_PASSPHRASE_HASH` | Yes | bcrypt hash of login passphrase |
+| `FIELD_AGENT_HOST` | No | Server host (default: 0.0.0.0) |
+| `FIELD_AGENT_PORT` | No | Server port (default: 8080) |
+| `FIELD_AGENT_DEBUG` | No | Enable debug mode |
 
 ## Common Tasks
 

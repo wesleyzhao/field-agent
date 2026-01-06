@@ -1,4 +1,4 @@
-# Code Review - termweave MVP
+# Code Review - field-agent MVP
 
 **Reviewer**: Senior Engineer Review
 **Date**: 2026-01-05
@@ -151,7 +151,7 @@ PYTHONPATH=. python3 -m pytest tests/unit/ -v
 PYTHONPATH=. python3 -m pytest tests/integration/ -v
 
 # All tests with coverage
-PYTHONPATH=. python3 -m pytest tests/ -v --cov=termweave
+PYTHONPATH=. python3 -m pytest tests/ -v --cov=field-agent
 
 # WebSocket smoke test
 PYTHONPATH=. python3 tests/integration/test_websocket.py

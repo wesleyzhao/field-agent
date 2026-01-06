@@ -1,4 +1,4 @@
-"""Configuration management for termweave.
+"""Configuration management for field-agent.
 
 Loads configuration from environment variables and optional YAML file.
 Environment variables override YAML values.
@@ -24,7 +24,7 @@ class Config:
 
     Configuration is loaded from:
     1. Default values
-    2. YAML file (if TERMWEAVE_CONFIG is set)
+    2. YAML file (if FIELD_AGENT_CONFIG is set)
     3. Environment variables (override YAML)
     """
 
@@ -41,8 +41,8 @@ class Config:
 
     @property
     def config_dir(self) -> Path:
-        """Return path to config directory (~/.termweave)."""
-        return Path.home() / ".termweave"
+        """Return path to config directory (~/.field_agent)."""
+        return Path.home() / ".field_agent"
 
     @property
     def access_token_expire_seconds(self) -> int:
@@ -102,7 +102,7 @@ class Config:
     @classmethod
     def _load_from_yaml(cls, config: "Config") -> "Config":
         """Load configuration from YAML file if specified."""
-        config_path = os.environ.get("TERMWEAVE_CONFIG")
+        config_path = os.environ.get("FIELD_AGENT_CONFIG")
         if not config_path:
             return config
 
@@ -138,13 +138,13 @@ class Config:
     def _load_from_env(cls, config: "Config") -> "Config":
         """Load configuration from environment variables."""
         env_mappings = {
-            "TERMWEAVE_HOST": ("host", str),
-            "TERMWEAVE_PORT": ("port", cls._parse_port),
-            "TERMWEAVE_DEBUG": ("debug", cls._parse_bool),
-            "TERMWEAVE_SECRET_KEY": ("secret_key", str),
-            "TERMWEAVE_PASSPHRASE_HASH": ("passphrase_hash", str),
-            "TERMWEAVE_ACCESS_TOKEN_EXPIRE_MINUTES": ("access_token_expire_minutes", int),
-            "TERMWEAVE_REFRESH_TOKEN_EXPIRE_DAYS": ("refresh_token_expire_days", int),
+            "FIELD_AGENT_HOST": ("host", str),
+            "FIELD_AGENT_PORT": ("port", cls._parse_port),
+            "FIELD_AGENT_DEBUG": ("debug", cls._parse_bool),
+            "FIELD_AGENT_SECRET_KEY": ("secret_key", str),
+            "FIELD_AGENT_PASSPHRASE_HASH": ("passphrase_hash", str),
+            "FIELD_AGENT_ACCESS_TOKEN_EXPIRE_MINUTES": ("access_token_expire_minutes", int),
+            "FIELD_AGENT_REFRESH_TOKEN_EXPIRE_DAYS": ("refresh_token_expire_days", int),
         }
 
         for env_var, (attr, converter) in env_mappings.items():

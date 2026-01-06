@@ -1,4 +1,4 @@
-"""FastAPI application for termweave."""
+"""FastAPI application for field-agent."""
 
 from contextlib import asynccontextmanager
 from pathlib import Path
@@ -7,8 +7,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
-from termweave.server.routes import auth, health, sessions
-from termweave.server import websocket
+from field_agent.server.routes import auth, health, sessions
+from field_agent.server import websocket
 
 
 @asynccontextmanager
@@ -22,7 +22,7 @@ async def lifespan(app: FastAPI):
 def create_app() -> FastAPI:
     """Create and configure the FastAPI application."""
     app = FastAPI(
-        title="termweave",
+        title="field-agent",
         description="Browser-based tmux session manager",
         version="0.1.0",
         lifespan=lifespan,

@@ -1,11 +1,11 @@
-"""Tests for termweave.auth module."""
+"""Tests for field-agent.auth module."""
 
 import time
 from datetime import datetime, timedelta, timezone
 
 import pytest
 
-from termweave.auth import JWTManager, PassphraseHasher, AuthError
+from field_agent.auth import JWTManager, PassphraseHasher, AuthError
 
 
 class TestPassphraseHasher:

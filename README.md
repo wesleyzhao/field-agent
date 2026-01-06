@@ -1,8 +1,8 @@
-# termweave
+# field-agent
 
 **Access your tmux sessions from anywhere - including your phone.**
 
-termweave is a lightweight web-based terminal that lets you manage and attach to tmux sessions through your browser. Perfect for:
+field-agent is a lightweight web-based terminal that lets you manage and attach to tmux sessions through your browser. Perfect for:
 - Checking on long-running processes from your iPhone
 - Managing remote development sessions without SSH apps
 - Quick terminal access when you're away from your desk
@@ -11,7 +11,7 @@ termweave is a lightweight web-based terminal that lets you manage and attach to
 ┌─────────────────────────────────────────────────────────────┐
 │  Browser (iPhone, iPad, Desktop)                            │
 │  ┌─────────────────────────────────────────────────────┐    │
-│  │ termweave                              [Logout]      │    │
+│  │ field-agent                              [Logout]      │    │
 │  ├─────────────────────────────────────────────────────┤    │
 │  │                                                     │    │
 │  │  claude-agent-1              ●  2 windows   5m ago  │    │
@@ -38,8 +38,8 @@ termweave is a lightweight web-based terminal that lets you manage and attach to
 
 ```bash
 cd ~
-git clone https://github.com/yourusername/termweave.git
-cd termweave
+git clone https://github.com/yourusername/field-agent.git
+cd field-agent
 pip install -e .
 ```
 
@@ -51,17 +51,17 @@ python3 -c "import secrets; print(secrets.token_urlsafe(32))"
 # Copy the output - this is your SECRET_KEY
 
 # Generate a passphrase hash (you'll be prompted to enter a passphrase)
-python3 -c "from termweave.auth import PassphraseHasher; print(PassphraseHasher().hash_passphrase(input('Enter passphrase: ')))"
+python3 -c "from field_agent.auth import PassphraseHasher; print(PassphraseHasher().hash_passphrase(input('Enter passphrase: ')))"
 # Copy the output - this is your PASSPHRASE_HASH
 ```
 
 ### 3. Start the server
 
 ```bash
-export TERMWEAVE_SECRET_KEY="paste-your-secret-key-here"
-export TERMWEAVE_PASSPHRASE_HASH="paste-your-hash-here"
+export FIELD_AGENT_SECRET_KEY="paste-your-secret-key-here"
+export FIELD_AGENT_PASSPHRASE_HASH="paste-your-hash-here"
 
-termweave serve --host 0.0.0.0 --port 8080
+field-agent serve --host 0.0.0.0 --port 8080
 ```
 
 ### 4. Open in browser
@@ -79,10 +79,10 @@ If your server is on a cloud VM (like GCP), you'll need to:
 1. **Open the firewall** for port 8080:
    ```bash
    # GCP example
-   gcloud compute firewall-rules create allow-termweave \
+   gcloud compute firewall-rules create allow-field-agent \
      --allow tcp:8080 \
      --source-ranges 0.0.0.0/0 \
-     --description "Allow termweave access"
+     --description "Allow field-agent access"
    ```
 
 2. **Get your external IP**:
@@ -100,17 +100,17 @@ All configuration is via environment variables:
 
 | Variable | Required | Default | Description |
 |----------|----------|---------|-------------|
-| `TERMWEAVE_SECRET_KEY` | **Yes** | - | JWT signing key (min 32 characters) |
-| `TERMWEAVE_PASSPHRASE_HASH` | **Yes** | - | bcrypt hash of your login passphrase |
-| `TERMWEAVE_HOST` | No | `0.0.0.0` | Server bind address |
-| `TERMWEAVE_PORT` | No | `8080` | Server port |
-| `TERMWEAVE_ACCESS_TOKEN_EXPIRE_MINUTES` | No | `15` | Access token lifetime |
-| `TERMWEAVE_REFRESH_TOKEN_EXPIRE_DAYS` | No | `7` | Refresh token lifetime |
-| `TERMWEAVE_DEBUG` | No | `false` | Enable debug mode |
+| `FIELD_AGENT_SECRET_KEY` | **Yes** | - | JWT signing key (min 32 characters) |
+| `FIELD_AGENT_PASSPHRASE_HASH` | **Yes** | - | bcrypt hash of your login passphrase |
+| `FIELD_AGENT_HOST` | No | `0.0.0.0` | Server bind address |
+| `FIELD_AGENT_PORT` | No | `8080` | Server port |
+| `FIELD_AGENT_ACCESS_TOKEN_EXPIRE_MINUTES` | No | `15` | Access token lifetime |
+| `FIELD_AGENT_REFRESH_TOKEN_EXPIRE_DAYS` | No | `7` | Refresh token lifetime |
+| `FIELD_AGENT_DEBUG` | No | `false` | Enable debug mode |
 
 ### Using a config file (optional)
 
-Create `~/.config/termweave/config.yaml`:
+Create `~/.config/field-agent/config.yaml`:
 
 ```yaml
 host: 0.0.0.0
@@ -125,19 +125,19 @@ passphrase_hash: $2b$12$...your-hash-here...
 
 ```bash
 # Start the server
-termweave serve [--host HOST] [--port PORT]
+field-agent serve [--host HOST] [--port PORT]
 
 # Generate a passphrase hash (interactive, secure)
-termweave hash-passphrase
+field-agent hash-passphrase
 
 # Generate a random secret key
-termweave generate-secret
+field-agent generate-secret
 
 # Check configuration and dependencies
-termweave check
+field-agent check
 
 # Show version
-termweave --version
+field-agent --version
 ```
 
 ---
@@ -145,7 +145,7 @@ termweave --version
 ## Security Notes
 
 - **Passphrase**: Use a strong passphrase (16+ characters recommended)
-- **HTTPS**: For production, put termweave behind a reverse proxy (nginx, Caddy) with HTTPS
+- **HTTPS**: For production, put field-agent behind a reverse proxy (nginx, Caddy) with HTTPS
 - **Firewall**: Restrict access to trusted IPs if possible
 - **Tokens**: Access tokens expire in 15 minutes; refresh tokens in 7 days
 
@@ -182,7 +182,7 @@ pip install -e ".[dev]"
 pytest
 
 # Run with auto-reload for development
-TERMWEAVE_DEBUG=true termweave serve
+FIELD_AGENT_DEBUG=true field-agent serve
 ```
 
 ---

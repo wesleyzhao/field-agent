@@ -3,16 +3,16 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "termweave"
+name = "field-agent"
 version = "0.1.0"
-description = "Browser-based tmux session manager with xterm.js terminal"
+description = "Browser-based tmux session manager - access your terminal from anywhere"
 readme = "README.md"
 license = {text = "MIT"}
 requires-python = ">=3.10"
 authors = [
     {name = "Wesley"}
 ]
-keywords = ["tmux", "terminal", "web", "xterm", "session-manager"]
+keywords = ["tmux", "terminal", "web", "xterm", "session-manager", "agency"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Environment :: Web Environment",
@@ -49,11 +49,11 @@ dev = [
 ]
 
 [project.scripts]
-termweave = "termweave.cli.main:cli"
+field-agent = "field_agent.cli.main:cli"
 
 [project.urls]
-Homepage = "https://github.com/wesley/termweave"
-Repository = "https://github.com/wesley/termweave"
+Homepage = "https://github.com/wesley/field-agent"
+Repository = "https://github.com/wesley/field-agent"
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"

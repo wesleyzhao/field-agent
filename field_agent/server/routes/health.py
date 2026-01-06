@@ -19,7 +19,7 @@ class HealthResponse(BaseModel):
 @router.get("/health", response_model=HealthResponse)
 async def health() -> HealthResponse:
     """Check server health and tmux availability."""
-    from termweave import __version__
+    from field_agent import __version__
 
     tmux_available = shutil.which("tmux") is not None
 

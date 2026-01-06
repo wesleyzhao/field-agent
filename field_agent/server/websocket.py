@@ -7,9 +7,9 @@ from typing import Optional
 
 from fastapi import APIRouter, Query, WebSocket, WebSocketDisconnect
 
-from termweave.auth import AuthError
-from termweave.server.dependencies import get_config, get_jwt_manager, get_provider
-from termweave.services.terminal_bridge import TerminalBridge
+from field_agent.auth import AuthError
+from field_agent.server.dependencies import get_config, get_jwt_manager, get_provider
+from field_agent.services.terminal_bridge import TerminalBridge
 
 router = APIRouter()
 

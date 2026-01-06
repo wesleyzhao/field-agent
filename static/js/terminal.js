@@ -1,5 +1,5 @@
 /**
- * Terminal module for termweave
+ * Terminal module for field-agent
  * Handles xterm.js and WebSocket communication
  */
 

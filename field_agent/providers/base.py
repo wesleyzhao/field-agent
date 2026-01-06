@@ -1,7 +1,7 @@
 """Abstract base class for server providers.
 
 This module defines the interface for server providers, allowing
-termweave to manage sessions across multiple servers in the future.
+field-agent to manage sessions across multiple servers in the future.
 """
 
 from abc import ABC, abstractmethod

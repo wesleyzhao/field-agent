@@ -2,15 +2,15 @@
 
 from typing import Optional
 
-from termweave.providers.base import ServerProvider, Session
-from termweave.services.tmux import TmuxService, TmuxSession
+from field_agent.providers.base import ServerProvider, Session
+from field_agent.services.tmux import TmuxService, TmuxSession
 
 
 class LocalServerProvider(ServerProvider):
     """Provider for managing local tmux sessions.
 
     This is the default provider for MVP, managing sessions
-    on the same machine where termweave is running.
+    on the same machine where field-agent is running.
     """
 
     def __init__(self, server_name: str = "local"):

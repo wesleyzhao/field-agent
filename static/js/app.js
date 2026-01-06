@@ -1,5 +1,5 @@
 /**
- * Main application for termweave
+ * Main application for field-agent
  */
 
 class App {

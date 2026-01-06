@@ -1,1 +1,1 @@
-"""Test suite for termweave."""
+"""Test suite for field-agent."""

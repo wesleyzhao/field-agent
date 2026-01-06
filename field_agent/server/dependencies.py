@@ -1,4 +1,4 @@
-"""FastAPI dependencies for termweave.
+"""FastAPI dependencies for field-agent.
 
 This module provides shared dependencies for route handlers using
 FastAPI's dependency injection system.
@@ -8,9 +8,9 @@ from typing import Annotated
 
 from fastapi import Depends, Header, HTTPException, status
 
-from termweave.auth import AuthError, JWTManager
-from termweave.config import Config, ConfigError
-from termweave.providers.local import LocalServerProvider
+from field_agent.auth import AuthError, JWTManager
+from field_agent.config import Config, ConfigError
+from field_agent.providers.local import LocalServerProvider
 
 # Cached instances
 _config: Config | None = None

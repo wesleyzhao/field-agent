@@ -2,15 +2,15 @@
 
 from fastapi import APIRouter, HTTPException, Request, status
 
-from termweave.models.auth import ErrorResponse
-from termweave.models.session import (
+from field_agent.models.auth import ErrorResponse
+from field_agent.models.session import (
     AttachSessionResponse,
     CreateSessionRequest,
     SessionListResponse,
     SessionResponse,
 )
-from termweave.server.dependencies import AuthDep, ProviderDep
-from termweave.services.tmux import TmuxError
+from field_agent.server.dependencies import AuthDep, ProviderDep
+from field_agent.services.tmux import TmuxError
 
 router = APIRouter(prefix="/sessions", tags=["sessions"])
 

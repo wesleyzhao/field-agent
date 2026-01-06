@@ -8,7 +8,7 @@ import struct
 import termios
 from typing import Optional
 
-from termweave.providers.base import ServerProvider
+from field_agent.providers.base import ServerProvider
 
 
 class TerminalBridge:

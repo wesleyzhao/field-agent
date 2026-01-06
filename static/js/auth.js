@@ -1,5 +1,5 @@
 /**
- * Auth module for termweave
+ * Auth module for field-agent
  * Handles passphrase authentication and JWT token management
  */
 
@@ -107,7 +107,7 @@ class AuthManager {
         this.accessToken = null;
         this.refreshToken = null;
         this.expiresAt = null;
-        sessionStorage.removeItem('termweave_auth');
+        sessionStorage.removeItem('field_agent_auth');
     }
 
     /**
@@ -120,7 +120,7 @@ class AuthManager {
         this.expiresAt = Date.now() + (data.expires_in * 1000);
 
         // Store in sessionStorage (cleared when tab closes)
-        sessionStorage.setItem('termweave_auth', JSON.stringify({
+        sessionStorage.setItem('field_agent_auth', JSON.stringify({
             accessToken: this.accessToken,
             refreshToken: this.refreshToken,
             expiresAt: this.expiresAt,
@@ -132,7 +132,7 @@ class AuthManager {
      */
     _restore() {
         try {
-            const stored = sessionStorage.getItem('termweave_auth');
+            const stored = sessionStorage.getItem('field_agent_auth');
             if (stored) {
                 const data = JSON.parse(stored);
                 this.accessToken = data.accessToken;

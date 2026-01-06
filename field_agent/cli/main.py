@@ -1,9 +1,9 @@
-"""CLI for termweave."""
+"""CLI for field-agent."""
 
 import click
 from rich.console import Console
 
-from termweave import __version__
+from field_agent import __version__
 
 console = Console()
 
@@ -11,7 +11,7 @@ console = Console()
 @click.group()
 @click.version_option(version=__version__)
 def cli():
-    """termweave - Browser-based tmux session manager."""
+    """field-agent - Browser-based tmux session manager."""
     pass
 
 
@@ -20,10 +20,10 @@ def cli():
 @click.option("--port", "-p", default=8080, type=int, help="Port to listen on")
 @click.option("--reload", is_flag=True, help="Enable auto-reload for development")
 def serve(host: str, port: int, reload: bool):
-    """Start the termweave server."""
+    """Start the field-agent server."""
     import uvicorn
 
-    from termweave.config import Config, ConfigError
+    from field_agent.config import Config, ConfigError
 
     # Validate config before starting
     try:
@@ -32,22 +32,22 @@ def serve(host: str, port: int, reload: bool):
     except ConfigError as e:
         console.print(f"[red]Configuration error:[/red] {e}")
         console.print("\nMake sure you have set:")
-        console.print("  - TERMWEAVE_SECRET_KEY (at least 32 characters)")
-        console.print("  - TERMWEAVE_PASSPHRASE_HASH (run 'termweave hash-passphrase')")
+        console.print("  - FIELD_AGENT_SECRET_KEY (at least 32 characters)")
+        console.print("  - FIELD_AGENT_PASSPHRASE_HASH (run 'field-agent hash-passphrase')")
         raise SystemExit(1)
 
     if not config.passphrase_hash:
         console.print("[yellow]Warning:[/yellow] No passphrase hash configured")
-        console.print("Run 'termweave hash-passphrase' to generate one")
+        console.print("Run 'field-agent hash-passphrase' to generate one")
 
-    console.print(f"\n[cyan]Starting termweave server...[/cyan]")
+    console.print(f"\n[cyan]Starting field-agent server...[/cyan]")
     console.print(f"  Host: {host}")
     console.print(f"  Port: {port}")
     console.print(f"  URL: http://{host}:{port}")
     console.print(f"\nPress Ctrl+C to stop\n")
 
     uvicorn.run(
-        "termweave.server.app:app",
+        "field_agent.server.app:app",
         host=host,
         port=port,
         reload=reload,
@@ -60,7 +60,7 @@ def hash_passphrase():
     """Generate a bcrypt hash for a passphrase."""
     import getpass
 
-    from termweave.auth import PassphraseHasher
+    from field_agent.auth import PassphraseHasher
 
     console.print("[cyan]Generate passphrase hash[/cyan]")
     console.print("Enter a strong passphrase (16+ characters recommended)\n")
@@ -80,7 +80,7 @@ def hash_passphrase():
 
     console.print("\n[green]Passphrase hash generated![/green]")
     console.print("\nAdd this to your environment or config:\n")
-    console.print(f'  export TERMWEAVE_PASSPHRASE_HASH="{hashed}"')
+    console.print(f'  export FIELD_AGENT_PASSPHRASE_HASH="{hashed}"')
 
 
 @cli.command("generate-secret")
@@ -92,7 +92,7 @@ def generate_secret():
 
     console.print("[green]Secret key generated![/green]")
     console.print("\nAdd this to your environment or config:\n")
-    console.print(f'  export TERMWEAVE_SECRET_KEY="{secret}"')
+    console.print(f'  export FIELD_AGENT_SECRET_KEY="{secret}"')
 
 
 @cli.command()
@@ -100,7 +100,7 @@ def check():
     """Check configuration and dependencies."""
     import shutil
 
-    console.print("[cyan]Checking termweave configuration...[/cyan]\n")
+    console.print("[cyan]Checking field-agent configuration...[/cyan]\n")
 
     # Check tmux
     tmux_path = shutil.which("tmux")
@@ -110,7 +110,7 @@ def check():
         console.print("[red]✗[/red] tmux not found - please install tmux")
 
     # Check config
-    from termweave.config import Config, ConfigError
+    from field_agent.config import Config, ConfigError
 
     try:
         config = Config.load()
@@ -119,7 +119,7 @@ def check():
         if config.passphrase_hash:
             console.print("[green]✓[/green] Passphrase hash configured")
         else:
-            console.print("[yellow]![/yellow] No passphrase hash (run 'termweave hash-passphrase')")
+            console.print("[yellow]![/yellow] No passphrase hash (run 'field-agent hash-passphrase')")
 
     except ConfigError as e:
         console.print(f"[red]✗[/red] Configuration error: {e}")

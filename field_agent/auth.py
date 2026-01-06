@@ -1,4 +1,4 @@
-"""Authentication module for termweave.
+"""Authentication module for field-agent.
 
 Provides passphrase hashing (bcrypt) and JWT token management.
 """

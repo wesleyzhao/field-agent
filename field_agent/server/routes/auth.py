@@ -2,14 +2,14 @@
 
 from fastapi import APIRouter, HTTPException, Request, status
 
-from termweave.auth import AuthError, PassphraseHasher
-from termweave.models.auth import (
+from field_agent.auth import AuthError, PassphraseHasher
+from field_agent.models.auth import (
     ErrorResponse,
     LoginRequest,
     RefreshRequest,
     TokenResponse,
 )
-from termweave.server.dependencies import ConfigDep, JWTManagerDep
+from field_agent.server.dependencies import ConfigDep, JWTManagerDep
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
