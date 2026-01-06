@@ -38,7 +38,7 @@ field-agent is a lightweight web-based terminal that lets you manage and attach 
 
 ```bash
 cd ~
-git clone https://github.com/yourusername/field-agent.git
+git clone https://github.com/wesleyzhao/field-agent.git
 cd field-agent
 pip install -e .
 ```

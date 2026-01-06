@@ -52,8 +52,8 @@ dev = [
 field-agent = "field_agent.cli.main:cli"
 
 [project.urls]
-Homepage = "https://github.com/wesley/field-agent"
-Repository = "https://github.com/wesley/field-agent"
+Homepage = "https://github.com/wesleyzhao/field-agent"
+Repository = "https://github.com/wesleyzhao/field-agent"
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
