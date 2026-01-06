@@ -32,49 +32,53 @@ field-agent is a lightweight web-based terminal that lets you manage and attach 
 └─────────────────────────────────────────────────────────────┘
 ```
 
-## Quick Start (5 minutes)
+## Quick Start (2 minutes)
 
-### 1. Install
+### Option A: One-liner install (recommended)
 
 ```bash
-cd ~
+curl -fsSL https://raw.githubusercontent.com/wesleyzhao/field-agent/easy-setup/install.sh | bash
+```
+
+This installs dependencies (tmux, Python) and runs the setup wizard.
+
+### Option B: Manual install
+
+```bash
 git clone https://github.com/wesleyzhao/field-agent.git
 cd field-agent
 pip install -e .
+field-agent setup
 ```
 
-### 2. Generate your credentials
+### Start the server
 
 ```bash
-# Generate a secure secret key
-python3 -c "import secrets; print(secrets.token_urlsafe(32))"
-# Copy the output - this is your SECRET_KEY
+# Local access only
+field-agent serve
 
-# Generate a passphrase hash (you'll be prompted to enter a passphrase)
-python3 -c "from field_agent.auth import PassphraseHasher; print(PassphraseHasher().hash_passphrase(input('Enter passphrase: ')))"
-# Copy the output - this is your PASSPHRASE_HASH
+# Remote access from phone (via Cloudflare tunnel)
+field-agent serve --tunnel
 ```
 
-### 3. Start the server
-
-```bash
-export FIELD_AGENT_SECRET_KEY="paste-your-secret-key-here"
-export FIELD_AGENT_PASSPHRASE_HASH="paste-your-hash-here"
-
-field-agent serve --host 0.0.0.0 --port 8080
-```
-
-### 4. Open in browser
-
-Go to `http://your-server-ip:8080` and login with your passphrase.
-
-That's it! You can now manage tmux sessions from any browser.
+Open `http://localhost:8080` (or the tunnel URL shown) and login with your passphrase.
 
 ---
 
-## Accessing from iPhone / Remote
+## Remote Access from iPhone
 
-If your server is on a cloud VM (like GCP), you'll need to:
+### Option 1: Cloudflare Tunnel (easiest, no firewall config)
+
+```bash
+field-agent serve --tunnel
+# Output: Access from anywhere: https://random-words.trycloudflare.com
+```
+
+Open the URL on your phone - done!
+
+### Option 2: Direct access (requires firewall config)
+
+If your server is on a cloud VM (like GCP):
 
 1. **Open the firewall** for port 8080:
    ```bash

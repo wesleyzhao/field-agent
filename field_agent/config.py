@@ -101,12 +101,21 @@ class Config:
 
     @classmethod
     def _load_from_yaml(cls, config: "Config") -> "Config":
-        """Load configuration from YAML file if specified."""
-        config_path = os.environ.get("FIELD_AGENT_CONFIG")
-        if not config_path:
-            return config
+        """Load configuration from YAML file.
 
-        path = Path(config_path)
+        Checks in order:
+        1. FIELD_AGENT_CONFIG env var (explicit path)
+        2. ~/.config/field-agent/config.yaml (default location)
+        """
+        # Check for explicit config path
+        config_path = os.environ.get("FIELD_AGENT_CONFIG")
+
+        if config_path:
+            path = Path(config_path)
+        else:
+            # Default to ~/.config/field-agent/config.yaml
+            path = Path.home() / ".config" / "field-agent" / "config.yaml"
+
         if not path.exists():
             return config
 
