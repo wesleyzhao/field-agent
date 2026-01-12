@@ -16,11 +16,15 @@ def temp_config_dir(tmp_path: Path) -> Generator[Path, None, None]:
 
 
 @pytest.fixture
-def clean_env(monkeypatch: pytest.MonkeyPatch) -> Generator[None, None, None]:
-    """Clear all FIELD_AGENT_ environment variables."""
+def clean_env(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> Generator[None, None, None]:
+    """Clear all FIELD_AGENT_ environment variables and prevent config file loading."""
     env_vars = [key for key in os.environ if key.startswith("FIELD_AGENT_")]
     for var in env_vars:
         monkeypatch.delenv(var, raising=False)
+
+    # Point to a non-existent config file to prevent auto-loading
+    fake_config = tmp_path / "nonexistent" / "config.yaml"
+    monkeypatch.setenv("FIELD_AGENT_CONFIG", str(fake_config))
     yield
 
 
