@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # field-agent installer
-# Usage: curl -fsSL https://raw.githubusercontent.com/wesleyzhao/field-agent/easy-setup/install.sh | bash
+# Usage: curl -fsSL https://raw.githubusercontent.com/wesleyzhao/field-agent/main/install.sh | bash
 #
 
 set -e
@@ -166,12 +166,12 @@ if [ -d "$INSTALL_DIR" ]; then
     echo -e "${YELLOW}Existing installation found. Updating...${NC}"
     cd "$INSTALL_DIR"
     git fetch origin
-    git checkout easy-setup 2>/dev/null || git checkout -b easy-setup origin/easy-setup
-    git pull origin easy-setup
+    git checkout main 2>/dev/null || git checkout -b main origin/main
+    git pull origin main
 else
     git clone https://github.com/wesleyzhao/field-agent.git "$INSTALL_DIR"
     cd "$INSTALL_DIR"
-    git checkout easy-setup 2>/dev/null || git checkout -b easy-setup origin/easy-setup
+    git checkout main
 fi
 
 # Install Python package

@@ -37,7 +37,7 @@ field-agent is a lightweight web-based terminal that lets you manage and attach 
 ### Option A: One-liner install (recommended)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/wesleyzhao/field-agent/easy-setup/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/wesleyzhao/field-agent/main/install.sh | bash
 ```
 
 This installs dependencies (tmux, Python) and runs the setup wizard.
